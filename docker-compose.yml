@@ -1,0 +1,25 @@
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: postgress_db
+    restart: always
+    env_file:
+        - .env
+    volumes:
+        - postgres_data:/var/lib/postgresql/data
+  
+  backend:
+      build: .
+      env_file:
+        - .env  
+      container_name: backend
+      command: python manage.py runserver 0.0.0.0:8000
+      volumes:
+        - .:/app
+      ports:
+        - "8000:8000"
+      depends_on:
+        - db
+volumes:
+  postgres_data:
