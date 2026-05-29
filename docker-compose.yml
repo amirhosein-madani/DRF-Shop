@@ -22,5 +22,17 @@ services:
         - "8000:8000"
       depends_on:
         - db
+  
+  smtp4dev:
+    image: rnwood/smtp4dev:latest
+    container_name: smtp4dev
+    restart: unless-stopped
+    ports:
+      - "3000:80"      # Web UI
+      - "25:25"        # SMTP Server
+    volumes:
+      - smtp4dev-data:/app/data   # ذخیره ایمیل‌ها
+
 volumes:
   postgres_data:
+  smtp4dev-data:

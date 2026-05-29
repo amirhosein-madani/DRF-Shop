@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     "django_celery_results",
 ]
 
-
+#  swagger settings
 SPECTACULAR_SETTINGS = {
     "TITLE": "core",
     "DESCRIPTION": "API documentation",
@@ -164,11 +164,27 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "uploads"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
+#  user model
 AUTH_USER_MODEL = "accounts.User"
+
+# email configuration
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp4dev"
+EMAIL_PORT = 25
+EMAIL_USE_TLS = False
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""
+
+TEMPLATED_EMAIL_BACKEND = "templated_email.backends.vanilla_django.TemplateBackend"
+TEMPLATED_EMAIL_TEMPLATE_DIR = "email/"
