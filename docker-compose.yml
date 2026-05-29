@@ -14,6 +14,7 @@ services:
       env_file:
         - .env  
       container_name: backend
+      restart: always
       command: python manage.py runserver 0.0.0.0:8000
       volumes:
         - .:/app
