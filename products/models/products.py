@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.urls import reverse
 
 
 class Product(models.Model):
@@ -28,3 +29,6 @@ class Product(models.Model):
                 counter += 1
             self.slug = slug
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("product-detail", kwargs={"pk": self.pk})
