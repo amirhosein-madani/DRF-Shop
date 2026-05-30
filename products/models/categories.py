@@ -1,10 +1,14 @@
 from django.db import models
 from django.utils.text import slugify
+from django.urls import reverse
 
 
 class Category(models.Model):
+    """
+    this is a model for ProdcutModel's category
+    """
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=120, unique=True, blank=True)
     image = models.ImageField(upload_to="product_categories", blank=True, null=True)
     is_active = models.BooleanField(default=True)
@@ -23,6 +27,9 @@ class Category(models.Model):
                 counter += 1
             self.slug = slug
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("category-detail", kwargs={"pk": self.pk})
 
     class Meta:
         verbose_name_plural = "Categories"
