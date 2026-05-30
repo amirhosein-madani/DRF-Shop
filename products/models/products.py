@@ -4,12 +4,15 @@ from django.urls import reverse
 
 
 class Product(models.Model):
+    """
+    this is ProductModel
+    """
 
     title = models.CharField(max_length=50)
     image = models.ImageField(upload_to="products", blank=True, null=True)
     description = models.TextField()
     category = models.ManyToManyField("Category")
-    price = models.DecimalField(max_digits=6, decimal_places=3)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
     slug = models.SlugField(blank=True, unique=True)
     color = models.ManyToManyField("Color", blank=True)
     size = models.ManyToManyField("Size", blank=True)

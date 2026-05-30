@@ -55,7 +55,7 @@ INSTALLED_APPS = [
 
 #  swagger settings
 SPECTACULAR_SETTINGS = {
-    "TITLE": "core",
+    "TITLE": "DRF-Shop",
     "DESCRIPTION": "API documentation",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
