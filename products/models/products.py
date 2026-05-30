@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 
 
-class Products(models.Model):
+class Product(models.Model):
 
     title = models.CharField(max_length=50)
     image = models.ImageField(upload_to="products", blank=True, null=True)
@@ -23,7 +23,7 @@ class Products(models.Model):
             base_slug = slugify(self.title)
             slug = base_slug
             counter = 1
-            while Products.objects.filter(slug=slug).exists():
+            while Product.objects.filter(slug=slug).exists():
                 slug = f"{base_slug}-{counter}"
                 counter += 1
             self.slug = slug
