@@ -1,5 +1,4 @@
 from rest_framework.pagination import PageNumberPagination
-from products.models.products import Product
 
 
 class DefaultPagination(PageNumberPagination):
