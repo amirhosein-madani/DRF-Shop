@@ -1,6 +1,6 @@
 import pytest
 from django.urls import reverse
-from .test_products_endpoints import admin_user, normal_user, api_client
+from .test_products_endpoints import admin_user, normal_user, api_client  # noqa: F401
 from products.models.sizes import Size
 from products.models.colors import Color
 from products.models.categories import Category
