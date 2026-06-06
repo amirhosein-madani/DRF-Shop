@@ -11,6 +11,17 @@ def api_client():
 
 
 @pytest.fixture
+def admin_user():
+    user = User.objects.create_superuser(
+        username="amir",
+        password="amirmad2007",
+        email="amirmadani901@gmail.com",
+        phone_number="09912038679",
+    )
+    return user
+
+
+@pytest.fixture
 def common_user():
     user = User.objects.create_user(
         username="amir",
@@ -18,6 +29,20 @@ def common_user():
         email="amirmadani901@gmail.com",
         phone_number="09912038679",
     )
+
+    return user
+
+
+@pytest.fixture
+def verified_user():
+    user = User.objects.create_user(
+        username="amir",
+        password="amirmad2007",
+        email="amirmadani901@gmail.com",
+        phone_number="09912038679",
+    )
+    user.is_verified = True
+    user.save()
     return user
 
 
@@ -138,3 +163,37 @@ class TestUserApi:
         url = reverse("user_profile")
         response = api_client.get(url)
         assert response.status_code == 401
+
+    def test_jwt_create_response_400_status(self, api_client):
+        url = reverse("jwt-create")
+        data = {}
+        response = api_client.post(url, data)
+        assert response.status_code == 400
+
+    def test_jwt_create_with_unverified_user_response_400_status(
+        self, api_client, common_user
+    ):
+        url = reverse("jwt-create")
+        data = {"username": "amir", "password": "amirmad2007"}
+        response = api_client.post(url, data)
+        assert response.status_code == 400
+
+    def test_jwt_create_response_401_status(self, api_client, common_user):
+        url = reverse("jwt-create")
+        data = {"username": common_user.username, "password": 123}
+        response = api_client.post(url, data)
+        assert response.status_code == 401
+
+    def test_jwt_create_response_200_status(self, api_client, admin_user):
+        url = reverse("jwt-create")
+        data = {"username": "amir", "password": "amirmad2007"}
+        response = api_client.post(url, data)
+        assert response.status_code == 200
+
+    def test_jwt_create_with_verified_user_response_200_status(
+        self, api_client, verified_user
+    ):
+        url = reverse("jwt-create")
+        data = {"username": "amir", "password": "amirmad2007"}
+        response = api_client.post(url, data)
+        assert response.status_code == 200
