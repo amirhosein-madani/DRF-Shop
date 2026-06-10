@@ -1,6 +1,10 @@
 
-import json
 from django.core.cache import cache
+
+# cart_1 = {
+#     '1' : {'quantity' : 4 , 'price' : '100.00'},
+#     '2' : {'quantity' : 7 , 'price' : '100.00'}
+# }
 
 
 class Cart:
