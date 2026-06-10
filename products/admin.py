@@ -7,7 +7,7 @@ from .models.sizes import Size
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ["title", "price", "stock"]
+    list_display = ["id", "title", "price", "stock"]
     list_filter = ["category", "color", "size"]
     search_fields = ["title"]
 

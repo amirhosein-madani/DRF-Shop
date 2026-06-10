@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "accounts",
     "products",
+    "cart",
     "rest_framework",
     "rest_framework.authtoken",
     "templated_email",
@@ -188,3 +189,14 @@ EMAIL_HOST_PASSWORD = ""
 
 TEMPLATED_EMAIL_BACKEND = "templated_email.backends.vanilla_django.TemplateBackend"
 TEMPLATED_EMAIL_TEMPLATE_DIR = "email/"
+
+# Caching Configuration
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379/2",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    }
+}

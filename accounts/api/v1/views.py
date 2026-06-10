@@ -106,9 +106,16 @@ class CustomDiscardAuthToken(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        request.user.auth_token.delete()
 
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        try:
+            request.user.auth_token.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+        except Exception:
+            return Response(
+                {"detail": "user has no active token"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):

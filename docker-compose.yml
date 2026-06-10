@@ -9,6 +9,14 @@ services:
     volumes:
         - postgres_data:/var/lib/postgresql/data
   
+  redis:
+    container_name: redis
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --save 60 1 --loglevel warning  
+    
   backend:
       build: .
       env_file:
