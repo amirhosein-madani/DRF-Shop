@@ -62,7 +62,9 @@ class CartRemoveApiView(APIView):
             )
 
         cart.remove(product_id)
-        return Response({"detail": "item removed from your cart"})
+        return Response(
+            {"detail": "item removed from your cart"}, status=status.HTTP_204_NO_CONTENT
+        )
 
 
 class ClearCartApiView(APIView):
@@ -73,4 +75,4 @@ class ClearCartApiView(APIView):
 
         cart.clear()
 
-        return Response({"detail": "cart cleared"})
+        return Response({"detail": "cart cleared"}, status=status.HTTP_204_NO_CONTENT)
