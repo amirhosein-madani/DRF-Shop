@@ -1,5 +1,4 @@
 name: Django Project Test and Deploy
-
 on:
   push:
     branches: ["master"]
@@ -13,6 +12,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Create .env file
+        run: |
+          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
+          echo "DEBUG=${{ secrets.DEBUG }}" >> .env
+          echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env
+          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
+          echo "ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }}" >> .env
+          echo "EMAIL_HOST=${{ secrets.EMAIL_HOST }}" >> .env
+          echo "EMAIL_PORT=${{ secrets.EMAIL_PORT }}" >> .env
+          echo "EMAIL_USE_TLS=${{ secrets.EMAIL_USE_TLS }}" >> .env
+          
       - name: Build containers
         run: docker compose build
 
@@ -26,8 +37,7 @@ jobs:
         run: docker compose run --rm backend flake8
 
       - name: Run Pytest (Tests)
-        run: docker compose run --rm backend pytest . 
+        run: docker compose run --rm backend pytest .
 
       - name: Run Django Check
         run: docker compose run --rm backend python manage.py check
-  
