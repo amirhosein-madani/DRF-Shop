@@ -1,5 +1,6 @@
 from django.db import models
 from products.models.products import Product
+from django.urls import reverse
 
 # Create your models here.
 
@@ -18,3 +19,6 @@ class Comment(models.Model):
         if self.pk:
             self.is_active = False
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("comment-detail", kwargs={"pk": self.pk})
