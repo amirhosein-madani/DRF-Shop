@@ -5,7 +5,8 @@ from .models import Comment
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ["id", "user", "product", "created_at"]
+    list_display = ["id", "user", "product", "is_active"]
+    list_filter = ["product"]
 
 
 admin.site.register(Comment, CommentAdmin)
