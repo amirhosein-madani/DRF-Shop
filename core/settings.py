@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "accounts",
     "products",
     "cart",
+    "reviews",
     "rest_framework",
     "rest_framework.authtoken",
     "templated_email",
