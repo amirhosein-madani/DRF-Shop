@@ -35,9 +35,7 @@ class CommentListSerializer(serializers.ModelSerializer):
 
 class CommentDetailSerializer(serializers.ModelSerializer):
     user = serializers.CharField(read_only=True)
-    product = serializers.SlugRelatedField(
-        slug_field="title", read_only= True
-    )
+    product = serializers.SlugRelatedField(slug_field="title", read_only=True)
 
     is_active = serializers.BooleanField(read_only=True)
 
@@ -46,8 +44,7 @@ class CommentDetailSerializer(serializers.ModelSerializer):
         fields = [
             "user",
             "product",
-            'text',
+            "text",
             "created_at",
             "is_active",
         ]
-
