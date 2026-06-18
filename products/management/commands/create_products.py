@@ -7,7 +7,7 @@ from ...models.products import Product
 
 
 class Command(BaseCommand):
-    help = "creating random users and posts"
+    help = "creating  random oroducts"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
