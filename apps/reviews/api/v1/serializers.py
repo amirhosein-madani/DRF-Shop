@@ -14,8 +14,10 @@ class CommentListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = [
+            "id",
             "user",
             "product",
+            "text",
             "created_at",
             "absolute_url",
             "is_active",
@@ -36,12 +38,12 @@ class CommentListSerializer(serializers.ModelSerializer):
 class CommentDetailSerializer(serializers.ModelSerializer):
     user = serializers.CharField(read_only=True)
     product = serializers.SlugRelatedField(slug_field="title", read_only=True)
-
     is_active = serializers.BooleanField(read_only=True)
 
     class Meta:
         model = Comment
         fields = [
+            "id",
             "user",
             "product",
             "text",

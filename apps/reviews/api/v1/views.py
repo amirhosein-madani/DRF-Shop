@@ -1,4 +1,3 @@
-
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from django_filters.rest_framework import DjangoFilterBackend

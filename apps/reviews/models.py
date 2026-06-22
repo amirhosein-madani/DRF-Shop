@@ -22,3 +22,6 @@ class Comment(models.Model):
 
     def get_absolute_url(self):
         return reverse("comment-detail", kwargs={"pk": self.pk})
+
+    def __str__(self):
+        return f"{self.user.user.username} -- {self.product}"
