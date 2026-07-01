@@ -1,6 +1,10 @@
 from django import forms
 from .models import User
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.auth.forms import AuthenticationForm as DjangoAuthenticationForm
+from django.core.exceptions import ValidationError
+from django.core import exceptions
+from django.contrib.auth.password_validation import validate_password
 
 
 class UserCreationForm(forms.ModelForm):
@@ -11,7 +15,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ["email", "username", "phone_number"]
+        fields = ["email", "username", "national_code"]
 
     def clean_password2(self):
         """Check both passwords match"""
@@ -42,14 +46,14 @@ class UserChangeForm(forms.ModelForm):
         fields = [
             "email",
             "username",
-            "phone_number",
             "password",
             "is_active",
-            "is_admin",
             "is_staff",
             "is_superuser",
             "is_verified",
+            "national_code",
         ]
+
 
 
 class LoginForm(forms.Form):

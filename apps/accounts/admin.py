@@ -14,16 +14,21 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ["username", "email", "phone_number", "is_admin", "is_verified"]
-    list_filter = ["username", "email", "phone_number", "is_admin"]
+    list_display = [
+        "username",
+        "email",
+        "is_verified",
+        "user_type",
+    ]
+    list_filter = ["username", "email", "user_type"]
     fieldsets = (
         (None, {"fields": ("username", "email", "password")}),
-        ("Personal info", {"fields": ("phone_number",)}),
+        ("Personal info", {"fields": ("phone_number", "national_code")}),
         (
             "Permissions",
             {
                 "fields": (
-                    "is_admin",
+                    "user_type",
                     "is_staff",
                     "is_superuser",
                     "is_verified",
@@ -44,10 +49,10 @@ class UserAdmin(BaseUserAdmin):
                 "fields": [
                     "username",
                     "email",
-                    "phone_number",
                     "password1",
                     "password2",
-                    "is_admin",
+                    "national_code",
+                    "user_type",
                     "is_staff",
                     "is_superuser",
                     "is_verified",
@@ -55,7 +60,7 @@ class UserAdmin(BaseUserAdmin):
             },
         ),
     ]
-    search_fields = ("email", "username", "phone_number")
+    search_fields = ("email", "username")
     ordering = ("username",)
     filter_horizontal = []
 
@@ -64,8 +69,8 @@ admin.site.register(User, UserAdmin)
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ("first_name", "last_name", "date_of_birth")
-    search_fields = ("first_name", "last_name")
+    list_display = ("id", "first_name", "last_name", "phone_number")
+    search_fields = ("first_name", "last_name", "phone_number")
 
 
 admin.site.register(Profile, ProfileAdmin)
